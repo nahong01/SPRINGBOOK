@@ -1,0 +1,6 @@
+2013-12-15 00:45:43,049 DEBUG (UserDao.java:25) - oracle.jdbc.driver.T4CCallableStatement@5c328896
+2013-12-15 00:45:43,290 DEBUG (UserDao.java:36) - oracle.jdbc.driver.T4CCallableStatement@68d31619
+2013-12-15 00:48:18,917 DEBUG (UserDao.java:25) - oracle.jdbc.driver.T4CCallableStatement@636b1b61
+2013-12-15 00:48:18,948 DEBUG (UserDao.java:36) - oracle.jdbc.driver.T4CCallableStatement@4b7ac3e5
+2013-12-15 01:01:29,736 DEBUG (UserDao.java:27) - oracle.jdbc.driver.T4CCallableStatement@79a55f23
+2013-12-15 01:01:29,768 DEBUG (UserDao.java:39) - oracle.jdbc.driver.T4CCallableStatement@7a4ff912
