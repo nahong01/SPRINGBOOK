@@ -10,15 +10,19 @@ import org.apache.log4j.Logger;
 
 import springbook.user.domain.User;
 
-//public class UserDao {
-public abstract class UserDao {
+public class UserDao {
+//public abstract class UserDao {
     protected   Logger      log = Logger.getRootLogger();
+    private SimpleConnectionMaker simpleConnectionMaker;
 
+    public UserDao(){
+        simpleConnectionMaker = new SimpleConnectionMaker();
+    }
+    
     public void add(User user) throws ClassNotFoundException, SQLException{
-        //Class.forName("oracle.jdbc.driver.OracleDriver");
-        //Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "spring", "book");
-        Connection c = getConnection();
-        
+        // 클래스를 분리함
+        Connection c = simpleConnectionMaker.makeNewConnection();
+
         PreparedStatement ps = c.prepareCall("INSERT INTO USERS(ID, NAME, PASSWORD) VALUES(?,?,?) ");
         ps.setString(1, user.getId());
         ps.setString(2, user.getName());
@@ -26,14 +30,12 @@ public abstract class UserDao {
 
         log.debug(ps.toString());
         ps.execute();
-        
     }
     
     public User get(String id) throws ClassNotFoundException, SQLException {
-        //Class.forName("oracle.jdbc.driver.OracleDriver");
-        //Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "spring", "book");
-        Connection c = getConnection();
-        
+        // 클래스를 분리함
+        Connection c = simpleConnectionMaker.makeNewConnection();
+
         PreparedStatement ps = c.prepareCall("SELECT * FROM USERS WHERE ID = ?");
         ps.setString(1, id);
         log.debug(ps.toString());
@@ -51,15 +53,5 @@ public abstract class UserDao {
         
         return user;
     }
-    
-    /*
-    private Connection getConnection() throws ClassNotFoundException,SQLException {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "spring", "book");
-        return c;
-    }
-    */
-
-    public abstract Connection getConnection() throws ClassNotFoundException,SQLException;
 
 }
